@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:experimental
-FROM docker.angie.software/angie:1.2.0
+FROM docker.angie.software/angie:1.4.1-debian
 
 LABEL maintainer="Dmitry Mikhin <dmikhin@webmonitorx.ru>"
 
