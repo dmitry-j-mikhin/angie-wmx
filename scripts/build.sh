@@ -1,13 +1,22 @@
 set -ex
 
-F=wallarm-4.6.14.x86_64-musl.sh
+F=wallarm-4.6.34.x86_64.sh
 curl https://meganode.webmonitorx.ru/4.6/${F} -O
 sh ./${F} -- -b --skip-registration --skip-systemd
 rm ${F}
 
-sed -i \
- -e 's|listen.*|listen 8080;|g' \
- /etc/angie/http.d/default.conf
-cat /tmp/build/default_addon.conf >> /etc/angie/http.d/default.conf
+cat /tmp/build/conf/default.conf > /etc/angie/http.d/default.conf
+cp /tmp/build/conf/proxy_params /etc/angie
 
-cp -a -v /tmp/build/docker-entrypoint.sh /
+echo "
+[program:registernode_loop]
+command=/usr/local/bin/registernode_loop
+autorestart=false
+startsecs=0
+redirect_stderr=true
+stdout_logfile=/var/log/wallarm/registernode_loop-out.log
+" >> /opt/wallarm/etc/supervisord.conf
+
+mkdir -p /usr/local/bin
+cp -a -v /tmp/build/scripts/registernode_* /usr/local/bin
+cp -a -v /tmp/build/scripts/docker-entrypoint.sh /

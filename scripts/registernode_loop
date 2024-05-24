@@ -1,0 +1,15 @@
+#!/bin/sh
+
+source /usr/local/bin/registernode_fn.sh
+cmd="register_node"
+
+while ! [ -s /opt/wallarm/etc/wallarm/node.yaml ]; do
+  if $cmd; then
+    break
+  else
+    echo "Wait before next register_node attempt..."
+    sleep 5
+  fi
+done
+
+exit 0
