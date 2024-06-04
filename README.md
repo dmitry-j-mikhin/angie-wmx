@@ -1,6 +1,6 @@
 # angie-wmx
 
-This is example [docker image](https://hub.docker.com/r/dmikhin/angie-wmx) based on official
+This is example [docker image](https://wmx-public.gitlab.yandexcloud.net/wmx-public/container-images/container_registry/93) based on official
 [docker.angie.software/angie:1.5.1](https://angie.software/installation/docker/)
 stable image with [WMX module](https://webmonitorx.ru/) integrated for WAF protection.
 For more details check:
