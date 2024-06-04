@@ -10,4 +10,4 @@ docker run -it --rm \
  -e "WALLARM_API_HOST=api.wallarm.ru" \
  -e "WALLARM_API_TOKEN=${NODE_TOKEN}" \
  -p 80:80 \
- dmikhin/angie-wmx:latest "$@"
+ wmx-public.gitlab.yandexcloud.net:5050/wmx-public/container-images/meganode:latest "$@"

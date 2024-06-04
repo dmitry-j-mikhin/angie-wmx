@@ -1,5 +1,5 @@
 set -ex
 
 docker build --no-cache --pull \
- --tag dmikhin/angie-wmx:latest .
-docker push dmikhin/angie-wmx:latest
+ --tag wmx-public.gitlab.yandexcloud.net:5050/wmx-public/container-images/meganode:latest .
+docker push wmx-public.gitlab.yandexcloud.net:5050/wmx-public/container-images/meganode:latest
