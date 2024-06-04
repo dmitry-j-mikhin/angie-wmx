@@ -8,6 +8,8 @@ rm ${F}
 cat /tmp/build/conf/default.conf > /etc/angie/http.d/default.conf
 cp /tmp/build/conf/proxy_params /etc/angie
 
+sed -i -e 's|standalone|container|' /opt/wallarm/env.list
+
 echo "
 [program:registernode_loop]
 command=/usr/local/bin/registernode_loop
