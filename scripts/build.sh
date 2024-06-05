@@ -1,6 +1,6 @@
 set -ex
 
-F=wallarm-4.6.36.x86_64.sh
+F=wallarm-4.6.37.x86_64.sh
 curl https://meganode.webmonitorx.ru/4.6/${F} -O
 sh ./${F} -- -b --skip-registration --skip-systemd
 rm ${F}
