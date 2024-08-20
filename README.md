@@ -1,7 +1,7 @@
 # angie-wmx
 
 This is example [docker image](https://wmx-public.gitlab.yandexcloud.net/wmx-public/container-images/container_registry/93) based on official
-[docker.angie.software/angie:1.5.2](https://angie.software/installation/docker/)
+[docker.angie.software/angie:1.6.2](https://angie.software/installation/docker/)
 stable image with [WMX module](https://webmonitorx.ru/) integrated for WAF protection.
 For more details check:
 * [Dockerfile](Dockerfile)
@@ -24,7 +24,7 @@ $ curl 0/etc/passwd
 <head><title>403 Forbidden</title></head>
 <body>
 <center><h1>403 Forbidden</h1></center>
-<hr><center>Angie/1.5.1</center>
+<hr><center>Angie/1.6.2</center>
 </body>
 </html>
 ```
