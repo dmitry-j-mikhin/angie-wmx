@@ -60,8 +60,8 @@ if [ "x${SLAB_ALLOC_ARENA}" = 'x' ]; then
 fi
 
 if [ -z "$WALLARM_API_TOKEN" ]; then
-  if [ ! -f "/etc/wallarm/private.key" ]; then
-    echo "ERROR: no WALLARM_API_TOKEN and no private key in /etc/wallarm/private.key" >&2
+  if [ ! -f "/opt/wallarm/etc/wallarm/private.key" ]; then
+    echo "ERROR: no WALLARM_API_TOKEN and no private key in /opt/wallarm/etc/wallarm/private.key" >&2
     exit 1
   fi
 fi
@@ -70,11 +70,29 @@ fi
 { register_node 2>&1 | tee /dev/fd/3 | grep -q 'Label "group" is required for this registration type' && exit; } 3>&1
 configure_nginx
 
+if [ -n "$HOST" ]; then
+  HOST_IP=`echo "$HOST" | tr -d '[]'`
+  echo "tarantool:
+  host: '$HOST_IP'" >> /opt/wallarm/etc/wallarm/node.yaml
+  echo "upstream wallarm_tarantool {
+  server $HOST:3313 max_fails=0 fail_timeout=0 max_conns=1;
+  keepalive 1;
+}
+wallarm_tarantool_upstream wallarm_tarantool;" >> /etc/angie/http.d/default.conf
+  sed -i \
+   -e "s|#||g" \
+   -e "s|127.0.0.1|$HOST_IP|g" \
+   /opt/wallarm/etc/collectd/wallarm-collectd.conf.d/wallarm-tarantool.conf
+else
+  HOST=127.0.0.1
+  HOST_IP=127.0.0.1
+fi
+
 su -p -s /bin/sh wallarm -c "exec /opt/wallarm/supervisord.sh" >/dev/null 2>&1 &
-echo "Waiting for Tarantool to be available at 127.0.0.1:3313"
+echo "Waiting for Tarantool to be available at $HOST:3313"
 while :
 do
-  nc -z 127.0.0.1 3313 && { echo "127.0.0.1:3313 is available"; break; }
+  nc -z $HOST_IP 3313 && { echo "$HOST:3313 is available"; break; }
   sleep 1
 done
 exec "$@"
