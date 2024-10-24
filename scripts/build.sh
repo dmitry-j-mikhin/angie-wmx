@@ -1,7 +1,7 @@
 set -ex
 
-F=wallarm-4.6.45.x86_64.sh
-curl https://meganode.webmonitorx.ru/4.6/${F} -O
+F=wallarm-4.8.0-pre.x86_64.sh
+curl https://meganode.webmonitorx.ru/4.8/${F} -O
 #sh /tmp/build/wallarm*.sh -- -b --skip-registration --skip-systemd
 sh ./wallarm*.sh -- -b --skip-registration --skip-systemd
 rm ${F}

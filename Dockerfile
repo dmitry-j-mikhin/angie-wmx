@@ -1,4 +1,4 @@
-FROM docker.angie.software/angie:1.6.2
+FROM docker.angie.software/angie:1.7.0
 
 LABEL maintainer="Dmitry Mikhin <dmikhin@webmonitorx.ru>"
 
