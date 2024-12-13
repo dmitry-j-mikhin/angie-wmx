@@ -4,6 +4,9 @@ set -e
 if [ "$1" != "angie" ] && [ "$1" != "angie-debug" ]; then
   exec "$@"
 fi
+if [ $# -eq 0 ]; then
+  set -- "angie" "-g" "daemon off;"
+fi
 
 source /usr/local/bin/registernode_fn.sh
 
