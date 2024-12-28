@@ -11,4 +11,4 @@ docker run -it --rm \
  -e "WALLARM_API_TOKEN=${NODE_TOKEN}" \
  --mount type=bind,source=$(realpath ./last_req.rb),target=/last_req.rb \
  -p 80:80 \
- wmx-public.gitlab.yandexcloud.net:5050/wmx-public/container-images/meganode:4.8.1-1 sh
+ wmx-public.gitlab.yandexcloud.net:5050/wmx-public/container-images/meganode:4.8.2-1 sh
