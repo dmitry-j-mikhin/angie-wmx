@@ -12,7 +12,7 @@ mapping_required = TDB.call('box.schema.func.exists', ['wallarm.select_requests'
 r = TDB.call(mapping_required ? 'wallarm.select_requests' : 'box.space.requests:select', 
              [nil, {iterator: 'LE', limit: 1}]
             )[-1][1]
-File.write('/sr.msgpack', r)
+#File.write('/sr.msgpack', r)
 sr = Proton::SerializedRequest.new(r)
 
 sr.each { |entry| p [entry.point,
