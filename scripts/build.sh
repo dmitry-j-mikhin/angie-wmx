@@ -1,10 +1,14 @@
+#!/bin/sh
+
 set -ex
 
-F=wallarm-4.6.50.x86_64.sh
-curl https://meganode.webmonitorx.ru/4.6/${F} -O
-#sh /tmp/build/wallarm*.sh -- -b --skip-registration --skip-systemd
-sh ./wallarm*.sh -- -b --skip-registration --skip-systemd
-rm ${F}
+if [[ "${WMX_SOURCE}" == *"pre"* ]]; then
+  sh /tmp/build/wmx/${WMX_SOURCE} -- -b --skip-registration --skip-systemd
+else
+  curl https://meganode.webmonitorx.ru/4.6/${WMX_SOURCE} -O
+  sh ./${WMX_SOURCE} -- -b --skip-registration --skip-systemd
+  rm ./${WMX_SOURCE}
+fi
 
 cat /tmp/build/conf/default.conf > /etc/angie/http.d/default.conf
 cp /tmp/build/conf/proxy_params /etc/angie
