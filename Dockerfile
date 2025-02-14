@@ -1,5 +1,5 @@
-FROM docker.angie.software/angie:1.8.1
-ARG WMX_SOURCE="wallarm-4.6.51.x86_64.sh"
+FROM docker.angie.software/angie:1.8.2
+ARG WMX_SOURCE="wallarm-4.6.52.x86_64.sh"
 
 LABEL maintainer="Dmitry Mikhin <dmikhin@webmonitorx.ru>"
 
